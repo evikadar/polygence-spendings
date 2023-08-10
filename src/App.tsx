@@ -9,14 +9,14 @@ import {
 
 const Login = lazy(() => import("./components/login/login"));
 const RandomActOfKindnessList = lazy(
-  () => import("./components/randomactsofkindness/randomActsOfKindnessList")
+  () => import("./components/spendings/spendingsList")
 );
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Outlet />}>
       <Route
-        path="random-act-of-kindness"
+        path="spendings"
         element={
           <Suspense fallback={<>...</>}>
             <RandomActOfKindnessList />

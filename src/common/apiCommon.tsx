@@ -8,7 +8,7 @@ interface Params {
 }
 
 const postConfig: Params = {
-  baseUrl: "https://pwatester.azurewebsites.net",
+  baseUrl: "https://shielded-depths-43687-bb049deacd16.herokuapp.com",
   headers: {
     Authorization: "",
   },
@@ -16,9 +16,8 @@ const postConfig: Params = {
 };
 
 const getConfig: Params = {
-  baseUrl: "https://pwatester.azurewebsites.net",
+  baseUrl: "https://shielded-depths-43687-bb049deacd16.herokuapp.com",
   headers: {
-    // Authorization: "",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
     "Access-Control-Allow-Headers":

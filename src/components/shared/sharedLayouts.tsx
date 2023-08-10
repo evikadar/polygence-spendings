@@ -1,4 +1,4 @@
-import { Alert, Button, Input } from "antd";
+import { Button, Form, Input, InputNumber, Radio } from "antd";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
 import styled from "styled-components";
@@ -9,18 +9,9 @@ export const StyledContainer = styled.div`
   margin: 10%;
 `;
 
-export const HorizontalScrollContainer = styled.div`
+export const FormContainer = styled(Form)`
   display: flex;
-  gap: 12px;
-  overflow-x: scroll;
-  scrollbar-width: none;
-  padding: 12px 0 20px 5px;
-  scroll-padding-left: 12px;
-  scroll-snap-type: x mandatory;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  gap: ${variables.spacingS};
 `;
 
 export const StyledButton = styled(Button)<{ backgroundcolor: string }>`
@@ -32,28 +23,22 @@ export const StyledButton = styled(Button)<{ backgroundcolor: string }>`
 
 export const StyledInput = styled(Input)`
   border: none;
-  border-bottom: 1px solid ${variables.lightGray};
-  border-radius: unset;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
 `;
 
-export const StyledSearch = styled(Input)`
+export const StyledInputNumber = styled(InputNumber)`
   border: none;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
-  padding: 12px;
+`;
+
+export const StyledRadioButton = styled(Radio.Button)`
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
 `;
 
 export const StyledTitle = styled(Title)`
   font-weight: bold;
   color: ${variables.black};
-`;
-
-export const StyledNotification = styled(Alert)`
-  height: 50px;
-  border-radius: 5px;
-  width: 100%;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  background-color: inherit;
-  border: none;
 `;
 
 export const StyledText = styled(Text)<{

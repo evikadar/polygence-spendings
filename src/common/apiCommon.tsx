@@ -10,7 +10,9 @@ interface Params {
 const postConfig: Params = {
   baseUrl: "https://shielded-depths-43687-bb049deacd16.herokuapp.com",
   headers: {
+    Accept: "application/json, text/plain, */*",
     Authorization: "",
+    "Content-Type": "application/json",
   },
   method: "post",
 };
@@ -18,11 +20,9 @@ const postConfig: Params = {
 const getConfig: Params = {
   baseUrl: "https://shielded-depths-43687-bb049deacd16.herokuapp.com",
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-    "Access-Control-Allow-Headers":
-      "X-Requested-With, content-type, Authorization",
-    "Access-Control-Allow-Credentials": true,
+    Accept: "application/json, text/plain, */*",
+    Authorization: "",
+    "Content-Type": "application/json",
   },
   method: "get",
   mode: "no-cors",
@@ -48,10 +48,15 @@ export const postAPI = async (url: string, data: any): Promise<any> => {
     });
 };
 
-export const getAPI = async (url: string): Promise<any> => {
+export const getAPI = async (
+  url: string,
+  currency?: string,
+  order?: string
+): Promise<any> => {
   return await axios({
     ...getConfig,
     url: `${getConfig.baseUrl}/${url}`,
+    params: { currency, order },
   })
     .then((response) => {
       return {

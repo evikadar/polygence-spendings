@@ -7,8 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-const Login = lazy(() => import("./components/login/login"));
-const RandomActOfKindnessList = lazy(
+const SpendingsList = lazy(
   () => import("./components/spendings/spendingsList")
 );
 
@@ -16,18 +15,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Outlet />}>
       <Route
-        path="spendings"
-        element={
-          <Suspense fallback={<>...</>}>
-            <RandomActOfKindnessList />
-          </Suspense>
-        }
-      />
-      <Route
         path=""
         element={
           <Suspense fallback={<>...</>}>
-            <Login />
+            <SpendingsList />
           </Suspense>
         }
       />

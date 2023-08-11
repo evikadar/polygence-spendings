@@ -6,9 +6,11 @@ import {
   StyledInputNumber,
   StyledRadioButton,
 } from "../shared/sharedLayouts";
-import { Button, Form, Radio } from "antd";
+import { Button, Form, Radio, Select } from "antd";
 import SpendingCard from "./spendingCard";
 import { getAPI, postAPI } from "../../common/apiCommon";
+import Filter from "./filter";
+import AddCostForm from "./addCostForm";
 
 export interface Spending {
   id: number;
@@ -19,94 +21,33 @@ export interface Spending {
 }
 
 const SpendingsList: React.FC = () => {
-  const testSpendings: Spending[] = [
-    {
-      id: 3,
-      description: "Lunch",
-      amount: 3200,
-      currency: "HUF",
-      spent_at: "2023-08-10T11:30:21.493Z",
-    },
-    {
-      id: 5,
-      description: "Ticket",
-      amount: 20,
-      currency: "USD",
-      spent_at: "2023-08-10T11:30:21.493Z",
-    },
-  ];
-  const [spendings, setSpendings] = React.useState(testSpendings);
+  const [spendings, setSpendings] = React.useState<Spending[]>([]);
+  const [order, setOrder] = React.useState("amount");
+  const [currency, setCurrency] = React.useState();
+  const [refresh, setRefresh] = React.useState(false);
 
-  const onFinish = (values: any) => {
-    // this could be updated with potential manually added date and time
-    const currentTime = new Date();
-    const data = {
-      description: values.description,
-      amount: values.amount,
-      currency: values.currency,
-      spent_at: currentTime.toISOString(),
-    };
-    console.log(data);
-    postAPI("spendings", { ...data }).then((res) => {
-      if (res.status === 200) {
-        console.log(res.data);
-        setSpendings(res.data);
-      } else {
-        console.log(res);
-      }
-    });
-    // lets make a POST call with the values here
+  const updateSorting = (value: string) => {
+    setOrder(value);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+  const callUpdateList = () => {
+    setRefresh(!refresh);
   };
-
-  const getData = () =>
-    getAPI("spendings").then((res) => {
-      if (res.status === 200) {
-        console.log(res.data);
-        setSpendings(res.data);
-      } else {
-        console.log(res);
-      }
-    });
 
   React.useEffect(() => {
-    getData();
-  }, []);
+    getAPI("spendings", currency, order).then((res) => {
+      if (res.status === 200) {
+        setSpendings(res.data);
+      } else {
+        console.log(res);
+      }
+    });
+  }, [order, currency, refresh]);
 
   return (
     <StyledContainer>
-      <FormContainer onFinish={onFinish} onFinishFailed={onFinishFailed}>
-        <Form.Item
-          name="description"
-          rules={[{ required: true, message: "Please provide a description!" }]}
-        >
-          <StyledInput size="large" placeholder="Description" />
-        </Form.Item>
-        <Form.Item
-          name="amount"
-          rules={[{ required: true, message: "Please provide the amount!" }]}
-        >
-          <StyledInputNumber size="large" placeholder="Amount" />
-        </Form.Item>
-        <Form.Item
-          name="currency"
-          rules={[{ required: true, message: "Please provide the currency!" }]}
-        >
-          <Radio.Group size="large">
-            <StyledRadioButton value="USD">USD</StyledRadioButton>
-            <StyledRadioButton value="HUF">HUF</StyledRadioButton>
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item>
-          <Button size="large" type="primary" htmlType="submit">
-            Save
-          </Button>
-        </Form.Item>
-      </FormContainer>
-
+      <AddCostForm updateList={callUpdateList} />
+      <Filter updateSorting={updateSorting} />
       {spendings.map((item) => (
         <SpendingCard item={item} key={item.id} />
       ))}

@@ -9,6 +9,11 @@ export const StyledContainer = styled.div`
   margin: 10%;
 `;
 
+export const FlexboxCol = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const FormContainer = styled(Form)`
   display: flex;
   gap: ${variables.spacingS};
@@ -39,6 +44,7 @@ export const StyledRadioButton = styled(Radio.Button)`
 export const StyledTitle = styled(Title)`
   font-weight: bold;
   color: ${variables.black};
+  margin: 0;
 `;
 
 export const StyledText = styled(Text)<{

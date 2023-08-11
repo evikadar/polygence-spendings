@@ -8,4 +8,5 @@ export const variables = {
   pink: "#ff5464",
   spacingS: "12px",
   spacingM: "24px",
+  antdBlue: "#1677ff",
 };

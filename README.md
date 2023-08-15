@@ -18,4 +18,5 @@ There are obviously a bunch of possible areas to improve, like:
 - improve CSS, especially on the form currency selection's
 - make it more responsive
 - add unit tests
+- improve functionality when sorting by amount to differentiate between currencies
 - add comment for all the components

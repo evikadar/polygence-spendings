@@ -1,8 +1,6 @@
 import React from "react";
-import { Button, Form, Radio, Select } from "antd";
-import styled from "styled-components";
-import { variables } from "../shared/variables";
-import { postAPI } from "../../common/apiCommon";
+import { Button, Form, Radio } from "antd";
+import { postAPI } from "../shared/apiCommon";
 import {
   FormContainer,
   StyledInput,
@@ -26,7 +24,6 @@ const AddCostForm: React.FC<Props> = ({ updateList }) => {
     };
     postAPI("spendings", { ...data }).then((res) => {
       if (res.status === 200) {
-        console.log(res.data);
         updateList();
       } else {
         console.log(res);
@@ -44,7 +41,11 @@ const AddCostForm: React.FC<Props> = ({ updateList }) => {
         name="description"
         rules={[{ required: true, message: "Please provide a description!" }]}
       >
-        <StyledInput size="large" placeholder="Description" />
+        <StyledInput
+          size="large"
+          placeholder="Description"
+          style={{ width: "50vw" }}
+        />
       </Form.Item>
       <Form.Item
         name="amount"

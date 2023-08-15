@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  FormContainer,
-  StyledContainer,
-  StyledInput,
-  StyledInputNumber,
-  StyledRadioButton,
-} from "../shared/sharedLayouts";
-import { Button, Form, Radio, Select } from "antd";
+import { StyledContainer } from "../shared/sharedLayouts";
 import SpendingCard from "./spendingCard";
-import { getAPI, postAPI } from "../../common/apiCommon";
+import { getAPI } from "../shared/apiCommon";
 import Filter from "./filter";
 import AddCostForm from "./addCostForm";
+import Title from "antd/es/typography/Title";
+import { variables } from "../shared/variables";
 
 export interface Spending {
   id: number;
@@ -20,14 +15,20 @@ export interface Spending {
   currency: string;
 }
 
+export type Currency = "USD" | "HUF" | undefined;
+
 const SpendingsList: React.FC = () => {
   const [spendings, setSpendings] = React.useState<Spending[]>([]);
   const [order, setOrder] = React.useState("amount");
-  const [currency, setCurrency] = React.useState();
+  const [currency, setCurrency] = React.useState<Currency>();
   const [refresh, setRefresh] = React.useState(false);
 
   const updateSorting = (value: string) => {
     setOrder(value);
+  };
+
+  const updateCurrency = (value?: Currency) => {
+    setCurrency(value);
   };
 
   const callUpdateList = () => {
@@ -46,8 +47,15 @@ const SpendingsList: React.FC = () => {
 
   return (
     <StyledContainer>
+      <Title style={{ margin: `0 auto ${variables.spacingL}` }} level={3}>
+        Your Spendings
+      </Title>
       <AddCostForm updateList={callUpdateList} />
-      <Filter updateSorting={updateSorting} />
+      <Filter
+        updateSorting={updateSorting}
+        updateCurrency={updateCurrency}
+        currency={currency}
+      />
       {spendings.map((item) => (
         <SpendingCard item={item} key={item.id} />
       ))}

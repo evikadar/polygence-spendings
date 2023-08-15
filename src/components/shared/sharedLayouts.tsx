@@ -6,7 +6,7 @@ import { variables } from "./variables";
 
 export const StyledContainer = styled.div`
   display: grid;
-  margin: 10%;
+  margin: ${variables.spacingL} 10%;
 `;
 
 export const FlexboxCol = styled.div`
@@ -17,6 +17,8 @@ export const FlexboxCol = styled.div`
 export const FormContainer = styled(Form)`
   display: flex;
   gap: ${variables.spacingS};
+  justify-content: space-between;
+  margin-bottom: ${variables.spacingS};
 `;
 
 export const StyledButton = styled(Button)<{ backgroundcolor: string }>`

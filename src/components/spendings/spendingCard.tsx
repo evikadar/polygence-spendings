@@ -54,7 +54,7 @@ const SpendingCard: React.FC<Props> = ({ item }) => {
   const formattedDate = `${spent_at.getHours()}:${spent_at.getMinutes()} - ${spent_at.toLocaleString(
     "default",
     { month: "long" }
-  )} ${spent_at.getDay()} ${spent_at.getFullYear()}
+  )} ${spent_at.getDate()} ${spent_at.getFullYear()}
 `;
 
   return (
